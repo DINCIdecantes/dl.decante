@@ -1,0 +1,3617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DL decantes — Decantes de Perfumes Importados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --azul-profundo: #0a2540;
+        --azul-principal: #1e4d7b;
+        --azul-medio: #4a7ba8;
+        --azul-claro: #a8c5e0;
+        --azul-suave: #e8f0f8;
+        --azul-fundo: #f5f9fc;
+        --branco: #ffffff;
+        --texto: #1a2b3d;
+        --texto-suave: #5a6b7d;
+        --borda: #dde7f0;
+        --sombra: 0 2px 20px rgba(30, 77, 123, 0.06);
+        --sombra-hover: 0 8px 30px rgba(30, 77, 123, 0.12);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        color: var(--texto);
+        background-color: var(--branco);
+        line-height: 1.6;
+        font-weight: 300;
+    }
+
+    h1, h2, h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+    }
+
+    [hidden] { display: none !important; }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* ===== Cor de fundo / largura por view ===== */
+    body[data-view^="checkout"] {
+        background-color: var(--azul-fundo);
+        min-height: 100vh;
+    }
+
+    body[data-view="checkout-dados"] .container,
+    body[data-view="checkout-pagamento"] .container {
+        max-width: 1100px;
+    }
+
+    body[data-view="checkout-confirmacao"] .container {
+        max-width: 880px;
+    }
+
+    /* ===== HEADER LANDING ===== */
+    .header-landing {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--borda);
+        z-index: 100;
+    }
+
+    .header-landing .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 26px;
+        font-weight: 600;
+        color: var(--azul-profundo);
+        letter-spacing: 0.02em;
+    }
+
+    .logo span {
+        color: var(--azul-medio);
+        font-style: italic;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 36px;
+        list-style: none;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+        color: var(--texto-suave);
+        font-weight: 400;
+        transition: color 0.25s ease;
+        position: relative;
+    }
+
+    .nav-links a:hover {
+        color: var(--azul-principal);
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: var(--azul-principal);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    .nav-cta {
+        background-color: var(--azul-principal);
+        color: var(--branco) !important;
+        padding: 10px 22px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.25s ease;
+    }
+
+    .nav-cta:hover {
+        background-color: var(--azul-profundo);
+    }
+
+    .nav-cta::after {
+        display: none;
+    }
+
+    .nav-direita {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .carrinho-btn {
+        position: relative;
+        background: transparent;
+        border: 1px solid var(--borda);
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--azul-profundo);
+        transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+        padding: 0;
+    }
+
+    .carrinho-btn:hover {
+        border-color: var(--azul-principal);
+        background-color: var(--azul-suave);
+    }
+
+    .carrinho-btn svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.8;
+    }
+
+    .carrinho-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background-color: var(--azul-principal);
+        color: var(--branco);
+        min-width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        font-size: 11px;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 0 6px;
+        border: 2px solid var(--branco);
+        line-height: 1;
+    }
+
+    .carrinho-badge.visivel {
+        display: inline-flex;
+    }
+
+    /* ===== HEADER CHECKOUT / CONFIRMAÇÃO ===== */
+    .header-checkout,
+    .header-confirmacao {
+        background-color: var(--branco);
+        border-bottom: 1px solid var(--borda);
+        padding: 18px 0;
+    }
+
+    .header-checkout .nav,
+    .header-confirmacao .nav {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-checkout .nav {
+        justify-content: space-between;
+    }
+
+    .header-confirmacao .nav {
+        justify-content: center;
+    }
+
+    .voltar {
+        font-size: 14px;
+        color: var(--texto-suave);
+        font-weight: 400;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: color 0.25s ease;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .voltar:hover {
+        color: var(--azul-principal);
+    }
+
+    .voltar svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+        padding: 160px 0 100px;
+        background: linear-gradient(180deg, var(--azul-suave) 0%, var(--branco) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 20%;
+        right: -150px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, var(--azul-claro) 0%, transparent 70%);
+        opacity: 0.4;
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 60px;
+        align-items: center;
+        position: relative;
+    }
+
+    .hero h1 {
+        font-size: 64px;
+        color: var(--azul-profundo);
+        margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+        color: var(--azul-medio);
+        font-style: italic;
+        font-weight: 400;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 14px 32px;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 4px;
+        transition: all 0.25s ease;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+    }
+
+    .btn-primary {
+        background-color: var(--azul-principal);
+        color: var(--branco);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--azul-profundo);
+        transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--azul-principal);
+        border: 1px solid var(--azul-principal);
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--azul-principal);
+        color: var(--branco);
+    }
+
+    /* ===== SECTION PADRÃO ===== */
+    section {
+        padding: 100px 0;
+    }
+
+    .section-header {
+        text-align: center;
+        max-width: 640px;
+        margin: 0 auto 64px;
+    }
+
+    .section-tag {
+        display: inline-block;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--azul-medio);
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+        font-size: 44px;
+        color: var(--azul-profundo);
+        margin-bottom: 16px;
+    }
+
+    .section-header p {
+        font-size: 17px;
+        color: var(--texto-suave);
+    }
+
+    /* ===== SOBRE ===== */
+    .sobre {
+        background-color: var(--branco);
+    }
+
+    .sobre-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        margin-top: 40px;
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sobre-card {
+        padding: 36px 28px;
+        background-color: var(--azul-fundo);
+        border-radius: 6px;
+        border: 1px solid var(--borda);
+    }
+
+    .sobre-icon {
+        width: 48px;
+        height: 48px;
+        background-color: var(--branco);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        border: 1px solid var(--azul-claro);
+    }
+
+    .sobre-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--azul-principal);
+    }
+
+    .sobre-card h3 {
+        font-size: 24px;
+        color: var(--azul-profundo);
+        margin-bottom: 12px;
+    }
+
+    .sobre-card p {
+        font-size: 15px;
+        color: var(--texto-suave);
+    }
+
+    /* ===== GALERIA ===== */
+    .galeria {
+        background-color: var(--azul-fundo);
+    }
+
+    .galeria-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 180px;
+        gap: 16px;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    .galeria-item {
+        overflow: hidden;
+        border-radius: 6px;
+        position: relative;
+        background-color: var(--branco);
+        border: 1px solid var(--borda);
+    }
+
+    .galeria-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 14px;
+        transition: transform 0.6s ease;
+    }
+
+    .galeria-item:hover img {
+        transform: scale(1.05);
+    }
+
+    .galeria-legend {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 6px 14px;
+        border-radius: 3px;
+        font-size: 12px;
+        color: var(--azul-profundo);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+    }
+
+    /* ===== PRODUTOS ===== */
+    .produtos {
+        background-color: var(--branco);
+    }
+
+    .produtos-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+
+    .produto-card {
+        background-color: var(--branco);
+        border: 1px solid var(--borda);
+        border-radius: 6px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .produto-card:hover {
+        border-color: var(--azul-claro);
+        box-shadow: var(--sombra-hover);
+        transform: translateY(-4px);
+    }
+
+    .produto-image {
+        height: 280px;
+        background-color: var(--azul-fundo);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .produto-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .produto-info {
+        padding: 24px 24px 28px;
+    }
+
+    .produto-marca {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--azul-medio);
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .produto-info h3 {
+        font-size: 24px;
+        color: var(--azul-profundo);
+        margin-bottom: 6px;
+    }
+
+    .produto-info > p {
+        font-size: 13px;
+        color: var(--texto-suave);
+        margin-bottom: 6px;
+        font-style: italic;
+    }
+
+    .produto-info > p.produto-inspiracao {
+        color: var(--azul-principal);
+        font-style: normal;
+        font-weight: 500;
+        margin-bottom: 18px;
+    }
+
+    .produto-tamanhos {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 18px;
+    }
+
+    .tamanho-input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
+    }
+
+    .tamanho {
+        font-size: 12px;
+        padding: 6px 14px;
+        background-color: var(--azul-suave);
+        color: var(--azul-principal);
+        border: 1px solid transparent;
+        border-radius: 20px;
+        font-weight: 500;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .tamanho:hover {
+        background-color: var(--azul-claro);
+        color: var(--branco);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(30, 77, 123, 0.18);
+    }
+
+    .tamanho:active {
+        transform: translateY(0);
+    }
+
+    .tamanho-input:checked + .tamanho {
+        background-color: var(--azul-principal);
+        color: var(--branco);
+        border-color: var(--azul-profundo);
+        box-shadow: 0 4px 12px rgba(30, 77, 123, 0.32);
+        transform: translateY(-1px);
+    }
+
+    .tamanho-input:focus-visible + .tamanho {
+        outline: 2px solid var(--azul-medio);
+        outline-offset: 2px;
+    }
+
+    .produto-preco {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 18px;
+        border-top: 1px solid var(--borda);
+    }
+
+    .preco {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--azul-profundo);
+    }
+
+    .preco span {
+        font-size: 13px;
+        color: var(--texto-suave);
+        font-weight: 400;
+    }
+
+    .btn-comprar {
+        background-color: var(--azul-profundo);
+        color: var(--branco);
+        padding: 8px 18px;
+        border-radius: 3px;
+        font-size: 13px;
+        font-weight: 500;
+        transition: background-color 0.25s ease;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .btn-comprar:hover {
+        background-color: var(--azul-principal);
+    }
+
+    .btn-adicionar.adicionado {
+        background-color: #2f7a4d;
+    }
+
+    /* ===== COMO FUNCIONA ===== */
+    .como-funciona {
+        background-color: var(--azul-fundo);
+    }
+
+    .passos {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+        position: relative;
+    }
+
+    .passo {
+        text-align: center;
+        position: relative;
+    }
+
+    .passo-numero {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 56px;
+        font-weight: 500;
+        color: var(--azul-claro);
+        line-height: 1;
+        margin-bottom: 12px;
+    }
+
+    .passo h3 {
+        font-size: 20px;
+        color: var(--azul-profundo);
+        margin-bottom: 10px;
+    }
+
+    .passo p {
+        font-size: 14px;
+        color: var(--texto-suave);
+    }
+
+    /* ===== CTA FINAL ===== */
+    .cta-final {
+        background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-principal) 100%);
+        color: var(--branco);
+        text-align: center;
+    }
+
+    .cta-final .container {
+        max-width: 720px;
+    }
+
+    .cta-final h2 {
+        font-size: 48px;
+        color: var(--branco);
+        margin-bottom: 20px;
+    }
+
+    .cta-final p {
+        font-size: 17px;
+        color: var(--azul-claro);
+        margin-bottom: 36px;
+    }
+
+    .cta-final .btn-primary {
+        background-color: var(--branco);
+        color: var(--azul-profundo);
+    }
+
+    .cta-final .btn-primary:hover {
+        background-color: var(--azul-suave);
+    }
+
+    /* ===== FOOTER LANDING ===== */
+    .footer-landing {
+        background-color: var(--azul-profundo);
+        color: var(--azul-claro);
+        padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+    }
+
+    .footer-logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--branco);
+        margin-bottom: 16px;
+    }
+
+    .footer-logo span {
+        color: var(--azul-medio);
+        font-style: italic;
+    }
+
+    .footer-col p {
+        font-size: 14px;
+        line-height: 1.7;
+        max-width: 320px;
+    }
+
+    .footer-col h4 {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--branco);
+        margin-bottom: 18px;
+        font-weight: 500;
+    }
+
+    .footer-col ul {
+        list-style: none;
+    }
+
+    .footer-col ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+        font-size: 14px;
+        transition: color 0.25s ease;
+    }
+
+    .footer-col ul li a:hover {
+        color: var(--branco);
+    }
+
+    .footer-bottom {
+        padding-top: 30px;
+        border-top: 1px solid rgba(168, 197, 224, 0.15);
+        text-align: center;
+        font-size: 13px;
+        color: var(--azul-medio);
+    }
+
+    /* ===== FOOTER CHECKOUT / CONFIRMAÇÃO ===== */
+    .footer-checkout {
+        text-align: center;
+        padding: 32px 0;
+        font-size: 13px;
+        color: var(--texto-suave);
+        border-top: 1px solid var(--borda);
+        background-color: var(--branco);
+    }
+
+    /* ===== DRAWER (carrinho lateral) ===== */
+    .drawer-backdrop {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(10, 37, 64, 0.45);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 200;
+    }
+
+    .drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 420px;
+        max-width: 100%;
+        background-color: var(--branco);
+        box-shadow: -10px 0 40px rgba(10, 37, 64, 0.18);
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 201;
+        display: flex;
+        flex-direction: column;
+    }
+
+    body.drawer-aberto {
+        overflow: hidden;
+    }
+
+    body.drawer-aberto .drawer-backdrop {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    body.drawer-aberto .drawer {
+        transform: translateX(0);
+    }
+
+    .drawer-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 28px;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    .drawer-header h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 26px;
+        color: var(--azul-profundo);
+        font-weight: 600;
+    }
+
+    .drawer-fechar {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--texto-suave);
+        transition: background-color 0.25s ease, color 0.25s ease;
+        padding: 0;
+    }
+
+    .drawer-fechar:hover {
+        background-color: var(--azul-suave);
+        color: var(--azul-profundo);
+    }
+
+    .drawer-fechar svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+    }
+
+    .drawer-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 8px 28px;
+    }
+
+    .drawer-vazio {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 16px;
+        color: var(--texto-suave);
+        height: 100%;
+    }
+
+    .drawer-vazio svg {
+        width: 56px;
+        height: 56px;
+        stroke: var(--azul-claro);
+        fill: none;
+        stroke-width: 1.4;
+        margin-bottom: 18px;
+    }
+
+    .drawer-vazio h3 {
+        font-size: 22px;
+        color: var(--azul-profundo);
+        margin-bottom: 8px;
+    }
+
+    .drawer-vazio p {
+        font-size: 14px;
+        max-width: 240px;
+    }
+
+    .drawer-item {
+        display: grid;
+        grid-template-columns: 72px 1fr auto;
+        gap: 14px;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--borda);
+        align-items: flex-start;
+    }
+
+    .drawer-item:last-child {
+        border-bottom: none;
+    }
+
+    .drawer-item-img {
+        width: 72px;
+        height: 72px;
+        border-radius: 4px;
+        overflow: hidden;
+        background-color: var(--azul-suave);
+        border: 1px solid var(--borda);
+    }
+
+    .drawer-item-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .drawer-item-info h4 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 18px;
+        color: var(--azul-profundo);
+        font-weight: 500;
+        margin-bottom: 4px;
+        line-height: 1.2;
+    }
+
+    .drawer-item-meta {
+        font-size: 12px;
+        color: var(--texto-suave);
+        margin-bottom: 10px;
+    }
+
+    .drawer-item-controles {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .qtd-btn {
+        width: 26px;
+        height: 26px;
+        border: 1px solid var(--borda);
+        background-color: var(--branco);
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        color: var(--azul-profundo);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        line-height: 1;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .qtd-btn:hover {
+        border-color: var(--azul-principal);
+        background-color: var(--azul-suave);
+    }
+
+    .drawer-item-controles .qtd {
+        font-size: 14px;
+        min-width: 22px;
+        text-align: center;
+        font-weight: 500;
+        color: var(--azul-profundo);
+    }
+
+    .drawer-item-controles .remover {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 12px;
+        color: var(--texto-suave);
+        text-decoration: underline;
+        margin-left: 4px;
+        padding: 0;
+    }
+
+    .drawer-item-controles .remover:hover {
+        color: var(--azul-principal);
+    }
+
+    .drawer-item-preco {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--azul-profundo);
+        white-space: nowrap;
+    }
+
+    .drawer-rodape {
+        padding: 24px 28px 28px;
+        border-top: 1px solid var(--borda);
+        background-color: var(--azul-fundo);
+    }
+
+    .drawer-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 8px;
+    }
+
+    .drawer-total .label {
+        font-size: 14px;
+        color: var(--azul-profundo);
+        font-weight: 500;
+    }
+
+    .drawer-total .valor {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--azul-profundo);
+    }
+
+    .drawer-aviso {
+        font-size: 12px;
+        color: var(--texto-suave);
+        margin-bottom: 16px;
+    }
+
+    .drawer-finalizar {
+        display: block;
+        width: 100%;
+        background-color: var(--azul-principal);
+        color: var(--branco);
+        padding: 14px 24px;
+        border: none;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.25s ease;
+    }
+
+    .drawer-finalizar:hover {
+        background-color: var(--azul-profundo);
+    }
+
+    .drawer-finalizar[disabled] {
+        background-color: var(--azul-claro);
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    /* ===== CHECKOUT — STEPS ===== */
+    .steps {
+        background-color: var(--branco);
+        padding: 24px 0;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    .steps-list {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        list-style: none;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .step {
+        flex: 1;
+        text-align: center;
+        position: relative;
+        font-size: 13px;
+        color: var(--texto-suave);
+    }
+
+    .step-num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background-color: var(--azul-suave);
+        color: var(--azul-medio);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        font-size: 13px;
+        margin-bottom: 6px;
+        border: 1px solid var(--borda);
+    }
+
+    .step.completo .step-num {
+        background-color: var(--azul-medio);
+        color: var(--branco);
+        border-color: var(--azul-medio);
+    }
+
+    .step.ativo .step-num {
+        background-color: var(--azul-principal);
+        color: var(--branco);
+        border-color: var(--azul-principal);
+    }
+
+    .step.ativo,
+    .step.completo {
+        color: var(--azul-profundo);
+        font-weight: 500;
+    }
+
+    .step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 14px;
+        left: calc(50% + 20px);
+        right: calc(-50% + 20px);
+        height: 1px;
+        background-color: var(--borda);
+    }
+
+    .step.completo:not(:last-child)::after {
+        background-color: var(--azul-medio);
+    }
+
+    /* ===== CHECKOUT — MAIN E TÍTULO ===== */
+    .checkout-main {
+        padding: 48px 0 80px;
+    }
+
+    .titulo-pagina {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 40px;
+        color: var(--azul-profundo);
+        margin-bottom: 8px;
+    }
+
+    .titulo-pagina p {
+        font-size: 16px;
+        color: var(--texto-suave);
+    }
+
+    /* ===== CHECKOUT — GRID ===== */
+    .checkout-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 32px;
+        align-items: start;
+    }
+
+    /* ===== CHECKOUT — FORMULÁRIO (passo 1) ===== */
+    .form-card {
+        background-color: var(--branco);
+        border: 1px solid var(--borda);
+        border-radius: 6px;
+        padding: 36px 36px 32px;
+    }
+
+    .form-section {
+        margin-bottom: 32px;
+    }
+
+    .form-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .form-section-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 24px;
+        color: var(--azul-profundo);
+        margin-bottom: 4px;
+    }
+
+    .form-section-desc {
+        font-size: 13px;
+        color: var(--texto-suave);
+        margin-bottom: 22px;
+    }
+
+    .form-row {
+        display: grid;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .form-row.cols-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-row.cols-3 {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .form-row.cep-row {
+        grid-template-columns: 200px 1fr;
+    }
+
+    .form-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--azul-profundo);
+        margin-bottom: 6px;
+    }
+
+    .form-group label span {
+        color: var(--azul-medio);
+        font-weight: 400;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 12px 14px;
+        border: 1px solid var(--borda);
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 14px;
+        color: var(--texto);
+        background-color: var(--branco);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        font-weight: 400;
+    }
+
+    .form-group input::placeholder {
+        color: #9ba8b5;
+        font-weight: 300;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--azul-principal);
+        box-shadow: 0 0 0 3px rgba(30, 77, 123, 0.08);
+    }
+
+    .form-group select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%234a7ba8' stroke-width='1.5' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        padding-right: 40px;
+    }
+
+    .form-help {
+        font-size: 12px;
+        color: var(--texto-suave);
+        margin-top: 6px;
+    }
+
+    /* ===== CHECKOUT — RESUMO LATERAL ===== */
+    .resumo-card {
+        background-color: var(--branco);
+        border: 1px solid var(--borda);
+        border-radius: 6px;
+        padding: 28px;
+        position: sticky;
+        top: 24px;
+    }
+
+    .resumo-card h2 {
+        font-size: 22px;
+        color: var(--azul-profundo);
+        margin-bottom: 4px;
+    }
+
+    .resumo-subtitle {
+        font-size: 13px;
+        color: var(--texto-suave);
+        margin-bottom: 24px;
+    }
+
+    .resumo-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    .resumo-imagem {
+        width: 64px;
+        height: 64px;
+        border-radius: 4px;
+        background-color: var(--azul-suave);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1px solid var(--borda);
+        overflow: hidden;
+    }
+
+    .resumo-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .resumo-vazio {
+        text-align: center;
+        padding: 28px 12px 8px;
+        color: var(--texto-suave);
+    }
+
+    .resumo-vazio p {
+        font-size: 14px;
+        margin-bottom: 14px;
+    }
+
+    .resumo-vazio a {
+        color: var(--azul-principal);
+        font-weight: 500;
+        font-size: 14px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .resumo-info {
+        flex: 1;
+    }
+
+    .resumo-info h4 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 18px;
+        color: var(--azul-profundo);
+        margin-bottom: 2px;
+        font-weight: 500;
+    }
+
+    .resumo-meta {
+        font-size: 12px;
+        color: var(--texto-suave);
+    }
+
+    .resumo-preco {
+        font-size: 14px;
+        color: var(--azul-principal);
+        font-weight: 500;
+        align-self: center;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .resumo-totais {
+        padding-top: 18px;
+    }
+
+    .resumo-linha {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: var(--texto-suave);
+        margin-bottom: 10px;
+    }
+
+    .resumo-linha span:last-child {
+        color: var(--texto);
+        font-weight: 400;
+    }
+
+    .resumo-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-top: 16px;
+        margin-top: 12px;
+        border-top: 1px solid var(--borda);
+    }
+
+    .resumo-total .label {
+        font-size: 14px;
+        color: var(--azul-profundo);
+        font-weight: 500;
+    }
+
+    .resumo-total .valor {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 30px;
+        font-weight: 600;
+        color: var(--azul-profundo);
+    }
+
+    /* ===== CHECKOUT — BOTÃO FINAL E SELOS ===== */
+    .submit-area {
+        margin-top: 32px;
+        padding-top: 28px;
+        border-top: 1px solid var(--borda);
+    }
+
+    .btn-finalizar {
+        width: 100%;
+        background-color: var(--azul-principal);
+        color: var(--branco);
+        padding: 16px 24px;
+        border: none;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.25s ease;
+        letter-spacing: 0.02em;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        box-sizing: border-box;
+    }
+
+    .btn-finalizar:hover {
+        background-color: var(--azul-profundo);
+    }
+
+    .btn-finalizar[disabled],
+    .btn-finalizar.disabled {
+        background-color: var(--azul-claro);
+        cursor: not-allowed;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .seguro {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--texto-suave);
+        margin-top: 16px;
+    }
+
+    .seguro svg {
+        width: 14px;
+        height: 14px;
+        stroke: var(--azul-medio);
+    }
+
+    .selos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid var(--borda);
+        font-size: 11px;
+        color: var(--texto-suave);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .selos-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .selos-item svg {
+        width: 14px;
+        height: 14px;
+        stroke: var(--azul-medio);
+    }
+
+    /* ===== CHECKOUT — PAGAMENTO PIX ===== */
+    .pagamento-card {
+        background-color: var(--branco);
+        border: 1px solid var(--borda);
+        border-radius: 6px;
+        padding: 36px;
+    }
+
+    .pix-bloco {
+        background-color: var(--azul-fundo);
+        border: 1px solid var(--azul-claro);
+        border-radius: 6px;
+        padding: 26px;
+    }
+
+    .pix-detalhes {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 22px;
+    }
+
+    .pix-detalhe-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        font-size: 14px;
+        color: var(--texto);
+        line-height: 1.5;
+    }
+
+    .pix-detalhe-item strong {
+        color: var(--azul-profundo);
+        font-weight: 500;
+    }
+
+    .pix-num {
+        width: 26px;
+        height: 26px;
+        background-color: var(--branco);
+        color: var(--azul-principal);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 500;
+        flex-shrink: 0;
+        border: 1px solid var(--azul-claro);
+    }
+
+    .pix-valor {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 18px 22px;
+        background-color: var(--azul-profundo);
+        border-radius: 6px;
+        color: var(--branco);
+    }
+
+    .pix-valor-label {
+        font-size: 13px;
+        color: var(--azul-claro);
+    }
+
+    .pix-valor-numero {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 26px;
+        font-weight: 600;
+        color: var(--branco);
+    }
+
+    /* ===== CONFIRMAÇÃO ===== */
+    .sucesso-topo {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .check-circle {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background-color: var(--azul-suave);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        border: 2px solid var(--azul-claro);
+    }
+
+    .check-circle svg {
+        width: 32px;
+        height: 32px;
+        stroke: var(--azul-principal);
+        stroke-width: 2.5;
+        fill: none;
+    }
+
+    .sucesso-topo h1 {
+        font-size: 44px;
+        color: var(--azul-profundo);
+        margin-bottom: 10px;
+    }
+
+    .sucesso-topo p {
+        font-size: 17px;
+        color: var(--texto-suave);
+        max-width: 540px;
+        margin: 0 auto;
+    }
+
+    .card {
+        background-color: var(--branco);
+        border: 1px solid var(--borda);
+        border-radius: 6px;
+        padding: 36px;
+        margin-bottom: 24px;
+    }
+
+    .card-titulo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 24px;
+        color: var(--azul-profundo);
+        margin-bottom: 4px;
+    }
+
+    .card-desc {
+        font-size: 13px;
+        color: var(--texto-suave);
+        margin-bottom: 24px;
+    }
+
+    .pix-area {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 32px;
+        align-items: center;
+    }
+
+    .qrcode-box {
+        width: 220px;
+        height: 220px;
+        background-color: var(--branco);
+        border: 1px solid var(--borda);
+        border-radius: 6px;
+        padding: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .qrcode-box svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .pix-instrucoes h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 22px;
+        color: var(--azul-profundo);
+        margin-bottom: 14px;
+    }
+
+    .pix-passos {
+        list-style: none;
+        margin-bottom: 22px;
+    }
+
+    .pix-passos li {
+        font-size: 14px;
+        color: var(--texto);
+        padding: 6px 0 6px 24px;
+        position: relative;
+        line-height: 1.5;
+    }
+
+    .pix-passos li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 14px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--azul-medio);
+    }
+
+    .copia-cola-area {
+        margin-top: 18px;
+    }
+
+    .copia-cola-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--azul-medio);
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .copia-cola-box {
+        display: flex;
+        gap: 8px;
+        align-items: stretch;
+    }
+
+    .copia-cola-codigo {
+        flex: 1;
+        padding: 12px 14px;
+        background-color: var(--azul-fundo);
+        border: 1px solid var(--borda);
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        color: var(--texto);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .btn-copiar {
+        padding: 12px 20px;
+        background-color: var(--azul-principal);
+        color: var(--branco);
+        border: none;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.25s ease;
+        white-space: nowrap;
+    }
+
+    .btn-copiar:hover {
+        background-color: var(--azul-profundo);
+    }
+
+    .aviso-prazo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 22px;
+        background-color: var(--azul-fundo);
+        border: 1px solid var(--azul-claro);
+        border-radius: 6px;
+        margin-top: 24px;
+    }
+
+    .aviso-prazo svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--azul-principal);
+        flex-shrink: 0;
+        fill: none;
+    }
+
+    .aviso-prazo p {
+        font-size: 14px;
+        color: var(--texto);
+    }
+
+    .aviso-prazo strong {
+        color: var(--azul-profundo);
+        font-weight: 500;
+    }
+
+    .pedido-num {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 22px;
+        background-color: var(--azul-suave);
+        border-radius: 6px;
+        margin-bottom: 24px;
+    }
+
+    .pedido-num-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--azul-medio);
+        font-weight: 500;
+    }
+
+    .pedido-num-valor {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--azul-profundo);
+        letter-spacing: 0.02em;
+    }
+
+    .resumo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+    }
+
+    .resumo-bloco h4 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--azul-medio);
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+
+    .resumo-bloco p {
+        font-size: 14px;
+        color: var(--texto);
+        line-height: 1.6;
+    }
+
+    .resumo-bloco strong {
+        color: var(--azul-profundo);
+        font-weight: 500;
+    }
+
+    .item-pedido {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    .item-imagem {
+        width: 64px;
+        height: 64px;
+        border-radius: 4px;
+        background-color: var(--azul-suave);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1px solid var(--borda);
+        overflow: hidden;
+    }
+
+    .item-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .confirmacao-vazio {
+        text-align: center;
+        padding: 28px 12px;
+        color: var(--texto-suave);
+        font-size: 14px;
+        border-top: 1px solid var(--borda);
+    }
+
+    .confirmacao-vazio a {
+        color: var(--azul-principal);
+        font-weight: 500;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .item-info {
+        flex: 1;
+    }
+
+    .item-info h4 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 18px;
+        color: var(--azul-profundo);
+        margin-bottom: 2px;
+        font-weight: 500;
+    }
+
+    .item-info .meta {
+        font-size: 12px;
+        color: var(--texto-suave);
+    }
+
+    .item-preco {
+        font-size: 14px;
+        color: var(--azul-principal);
+        font-weight: 500;
+        align-self: center;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .totais {
+        padding-top: 18px;
+        margin-top: 8px;
+        border-top: 1px solid var(--borda);
+    }
+
+    .totais-linha {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: var(--texto-suave);
+        margin-bottom: 8px;
+    }
+
+    .totais-linha span:last-child {
+        color: var(--texto);
+    }
+
+    .totais-final {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-top: 14px;
+        margin-top: 10px;
+        border-top: 1px solid var(--borda);
+    }
+
+    .totais-final .label {
+        font-size: 14px;
+        color: var(--azul-profundo);
+        font-weight: 500;
+    }
+
+    .totais-final .valor {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--azul-profundo);
+    }
+
+    .acoes {
+        display: flex;
+        gap: 12px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+    }
+
+    .acoes .btn-acao {
+        padding: 14px 28px;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        text-align: center;
+        display: inline-block;
+        flex: 1;
+        min-width: 160px;
+        border: none;
+    }
+
+    .btn-primario {
+        background-color: var(--azul-principal);
+        color: var(--branco);
+    }
+
+    .btn-primario:hover {
+        background-color: var(--azul-profundo);
+    }
+
+    .btn-secundario {
+        background-color: transparent;
+        color: var(--azul-principal);
+        border: 1px solid var(--azul-principal);
+    }
+
+    .btn-secundario:hover {
+        background-color: var(--azul-principal);
+        color: var(--branco);
+    }
+
+    .info-final {
+        text-align: center;
+        margin-top: 32px;
+        padding-top: 24px;
+        font-size: 13px;
+        color: var(--texto-suave);
+    }
+
+    .info-final a {
+        color: var(--azul-principal);
+        font-weight: 500;
+    }
+
+    .info-final a:hover {
+        text-decoration: underline;
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 900px) {
+        .hero-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+        }
+
+        .nav-direita {
+            gap: 14px;
+        }
+
+        .nav-links {
+            gap: 20px;
+        }
+
+        .nav-links li:not(:last-child) {
+            display: none;
+        }
+
+        .sobre-grid,
+        .produtos-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .passos {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .galeria-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 160px;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .section-header h2,
+        .cta-final h2 {
+            font-size: 32px;
+        }
+
+        section {
+            padding: 70px 0;
+        }
+
+        .checkout-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-card,
+        .pagamento-card {
+            padding: 28px 24px;
+        }
+
+        .resumo-card {
+            position: static;
+            order: -1;
+        }
+
+        .titulo-pagina h1 {
+            font-size: 30px;
+        }
+
+        .form-row.cols-3,
+        .form-row.cep-row {
+            grid-template-columns: 1fr;
+        }
+
+        .step {
+            font-size: 12px;
+        }
+
+        .selos {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    @media (max-width: 760px) {
+        .pix-area {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .qrcode-box {
+            margin: 0 auto;
+        }
+
+        .pix-passos li {
+            text-align: left;
+        }
+
+        .resumo-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .card {
+            padding: 28px 24px;
+        }
+
+        .sucesso-topo h1 {
+            font-size: 32px;
+        }
+
+        .copia-cola-box {
+            flex-direction: column;
+        }
+
+        .acoes {
+            flex-direction: column;
+        }
+
+        .acoes .btn-acao {
+            flex: none;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .galeria-grid {
+            grid-template-columns: 1fr;
+            grid-auto-rows: 220px;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .drawer {
+            width: 100%;
+        }
+
+        .drawer-header,
+        .drawer-rodape,
+        .drawer-body {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .form-row.cols-2 {
+            grid-template-columns: 1fr;
+        }
+
+        .checkout-main {
+            padding: 28px 0 60px;
+        }
+
+        .pix-valor {
+            padding: 16px 18px;
+        }
+
+        .pix-valor-numero {
+            font-size: 22px;
+        }
+
+        .pedido-num {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+    }
+</style>
+</head>
+<body data-view="landing">
+
+<!-- ============================================================
+     HEADERS (um por view, alternados pelo router)
+     ============================================================ -->
+
+<!-- HEADER LANDING -->
+<header class="header-landing" data-view-name="landing">
+    <nav class="nav">
+        <a href="#inicio" class="logo">DL <span>decantes</span></a>
+        <div class="nav-direita">
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#produtos" class="nav-cta">Comprar</a></li>
+            </ul>
+            <button type="button" class="carrinho-btn" aria-label="Abrir carrinho">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 7h12l-1.2 11a2 2 0 01-2 1.8H9.2a2 2 0 01-2-1.8L6 7z"/>
+                    <path d="M9 7V5a3 3 0 016 0v2"/>
+                </svg>
+                <span class="carrinho-badge">0</span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- HEADER CHECKOUT (passo 1) -->
+<header class="header-checkout" data-view-name="checkout-dados" hidden>
+    <div class="container">
+        <nav class="nav">
+            <a href="#" class="logo">DL <span>decantes</span></a>
+            <a href="#" class="voltar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Voltar à loja
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- HEADER CHECKOUT (passo 2) -->
+<header class="header-checkout" data-view-name="checkout-pagamento" hidden>
+    <div class="container">
+        <nav class="nav">
+            <a href="#" class="logo">DL <span>decantes</span></a>
+            <a href="#checkout/dados" class="voltar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Voltar para dados
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- HEADER CONFIRMAÇÃO (passo 3) -->
+<header class="header-confirmacao" data-view-name="checkout-confirmacao" hidden>
+    <div class="container">
+        <nav class="nav">
+            <a href="#" class="logo">DL <span>decantes</span></a>
+        </nav>
+    </div>
+</header>
+
+<!-- ============================================================
+     VIEW LANDING
+     ============================================================ -->
+<div data-view-name="landing">
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Decantes de perfumes inspirados, <em>preço sem igual!</em></h1>
+                    <div class="hero-buttons">
+                        <a href="#produtos" class="btn btn-primary">Ver Catálogo</a>
+                        <a href="#como-funciona" class="btn btn-secondary">Como Funciona</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="sobre" id="sobre">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Por que decantes</span>
+                <h2>A forma inteligente de usar perfumes caros</h2>
+                <p>Comprar um frasco de 100ml para descobrir que o aroma não combina com você é frustrante. Os decantes resolvem isso.</p>
+            </div>
+
+            <div class="sobre-grid">
+                <div class="sobre-card">
+                    <div class="sobre-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v6"/>
+                            <path d="M9 8h6"/>
+                            <rect x="7" y="8" width="10" height="14" rx="2"/>
+                        </svg>
+                    </div>
+                    <h3>Sem desperdício</h3>
+                    <p>Compre 5ml, 10ml ou 20ml. Se gostar, você sempre pode pedir mais. Se não gostar, perdeu pouco.</p>
+                </div>
+
+                <div class="sobre-card">
+                    <div class="sobre-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="8" width="18" height="13" rx="2"/>
+                            <path d="M8 8V6a4 4 0 018 0v2"/>
+                        </svg>
+                    </div>
+                    <h3>Prático no dia a dia</h3>
+                    <p>Frascos pequenos cabem na bolsa, na mochila e na mala de mão. Use no trabalho, na viagem, onde quiser.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="galeria" id="galeria">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Galeria</span>
+                <h2>Tamanho dos nossos frascos de decantes</h2>
+                <p>Cada frasco é preparado manualmente, com cuidado para preservar a fragrância original e chegar em perfeito estado.</p>
+            </div>
+
+            <div class="galeria-grid">
+                <div class="galeria-item">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_2X_767265-MLB97399374306_112025-F-100-frascos-5ml-spray-de-vidro-para-amostra-de-perfumes.webp" alt="Frasco decantador">
+                    <span class="galeria-legend">5ml</span>
+                </div>
+                <div class="galeria-item">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_777213-MLB82172385573_012025-O.webp" alt="Perfume importado">
+                    <span class="galeria-legend">10ml</span>
+                </div>
+                <div class="galeria-item">
+                    <img src="https://item-shopping.c.yimg.jp/i/n/w-market_spray-garas-5_2_d_20240228095854" alt="Frascos de vidro">
+                    <span class="galeria-legend">20ml</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUTOS -->
+    <section class="produtos" id="produtos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Catálogo</span>
+                <h2>Os nossos melhores inspirados</h2>
+                <p>Uma seleção dos perfumes que mais saem. Tem clássico, tem lançamento e tem aquela fragrância que ninguém esperava virar febre.</p>
+            </div>
+
+            <div class="produtos-grid">
+                <article class="produto-card"
+                         data-id="vulcan-feu"
+                         data-nome="Vulcan Feu"
+                         data-img="https://zaoud.it/cdn/shop/files/Vulcan-Feu-perfume-bottle-surrounded-with-mango-and-oud-against-white-background_defeb2ea-d17a-4df7-9383-ac9746bcfdd4.jpg?v=1743758735">
+                    <div class="produto-image">
+                        <img src="https://zaoud.it/cdn/shop/files/Vulcan-Feu-perfume-bottle-surrounded-with-mango-and-oud-against-white-background_defeb2ea-d17a-4df7-9383-ac9746bcfdd4.jpg?v=1743758735" alt="Perfume oriental">
+                    </div>
+                    <div class="produto-info">
+                        <span class="produto-marca">floral compartilhável</span>
+                        <h3>Vulcan Feu</h3>
+                        <p>Notas de Manga, Limão, Gengibre e Ruibarbo</p>
+                        <p class="produto-inspiracao">Inspirado no: God of Fire de Stéphane Humbert Lucas</p>
+                        <div class="produto-tamanhos">
+                            <input type="radio" id="vulcan-5ml" name="vulcan-tamanho" class="tamanho-input" data-tamanho="5ml" data-preco="29.90" checked>
+                            <label for="vulcan-5ml" class="tamanho">5ml</label>
+                            <input type="radio" id="vulcan-10ml" name="vulcan-tamanho" class="tamanho-input" data-tamanho="10ml" data-preco="59.80">
+                            <label for="vulcan-10ml" class="tamanho">10ml</label>
+                            <input type="radio" id="vulcan-20ml" name="vulcan-tamanho" class="tamanho-input" data-tamanho="20ml" data-preco="119.60">
+                            <label for="vulcan-20ml" class="tamanho">20ml</label>
+                        </div>
+                        <div class="produto-preco">
+                            <div class="preco">R$ 29,90 <span>/ 5ml</span></div>
+                            <button type="button" class="btn-comprar btn-adicionar">Adicionar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="produto-card"
+                         data-id="pacific-aura"
+                         data-nome="Pacific Aura da Rayhaan"
+                         data-img="https://tse3.mm.bing.net/th/id/OIP.mGNzib9Is33qicBiwlXpBQHaJQ?cb=thfc1&rs=1&pid=ImgDetMain&o=7&rm=3">
+                    <div class="produto-image">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.mGNzib9Is33qicBiwlXpBQHaJQ?cb=thfc1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Pacific Aura da Rayhaan">
+                    </div>
+                    <div class="produto-info">
+                        <span class="produto-marca">Aromático Aquático</span>
+                        <h3>Pacific Aura da Rayhaan</h3>
+                        <p>Notas de Hortelã, Cidra, Mandarina, Groselha Preta, Bergamota, Coentro, Manjericão, Cenoura, Rosa, Ambroxan, Figo, Âmbar</p>
+                        <p class="produto-inspiracao">Inspirado no: Pacific Chill Louis Vuitton</p>
+                        <div class="produto-tamanhos">
+                            <input type="radio" id="pacific-aura-5ml" name="pacific-aura-tamanho" class="tamanho-input" data-tamanho="5ml" data-preco="34.90" checked>
+                            <label for="pacific-aura-5ml" class="tamanho">5ml</label>
+                            <input type="radio" id="pacific-aura-10ml" name="pacific-aura-tamanho" class="tamanho-input" data-tamanho="10ml" data-preco="69.80">
+                            <label for="pacific-aura-10ml" class="tamanho">10ml</label>
+                            <input type="radio" id="pacific-aura-20ml" name="pacific-aura-tamanho" class="tamanho-input" data-tamanho="20ml" data-preco="139.60">
+                            <label for="pacific-aura-20ml" class="tamanho">20ml</label>
+                        </div>
+                        <div class="produto-preco">
+                            <div class="preco">R$ 34,90 <span>/ 5ml</span></div>
+                            <button type="button" class="btn-comprar btn-adicionar">Adicionar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="produto-card"
+                         data-id="liquid-brun"
+                         data-nome="Liquid Brun"
+                         data-img="https://www.duneperfumes.com.au/cdn/shop/files/20_8d41c767-b174-4230-bf0d-42ff9504e15f.png?v=1730942098&width=1445">
+                    <div class="produto-image">
+                        <img src="https://www.duneperfumes.com.au/cdn/shop/files/20_8d41c767-b174-4230-bf0d-42ff9504e15f.png?v=1730942098&width=1445" alt="Perfume amadeirado">
+                    </div>
+                    <div class="produto-info">
+                        <span class="produto-marca">Amadeirado Especiado</span>
+                        <h3>Liquid Brun</h3>
+                        <p>Notas de Canela, Flor de Laranjeira, Cardamomo, Bergamota, Baunilha de Bourbon e Elemi</p>
+                        <p class="produto-inspiracao">Inspirado no: Althaïr da Parfums de Marly</p>
+                        <div class="produto-tamanhos">
+                            <input type="radio" id="liquid-brun-5ml" name="liquid-brun-tamanho" class="tamanho-input" data-tamanho="5ml" data-preco="29.90" checked>
+                            <label for="liquid-brun-5ml" class="tamanho">5ml</label>
+                            <input type="radio" id="liquid-brun-10ml" name="liquid-brun-tamanho" class="tamanho-input" data-tamanho="10ml" data-preco="59.80">
+                            <label for="liquid-brun-10ml" class="tamanho">10ml</label>
+                            <input type="radio" id="liquid-brun-20ml" name="liquid-brun-tamanho" class="tamanho-input" data-tamanho="20ml" data-preco="119.60">
+                            <label for="liquid-brun-20ml" class="tamanho">20ml</label>
+                        </div>
+                        <div class="produto-preco">
+                            <div class="preco">R$ 29,90 <span>/ 5ml</span></div>
+                            <button type="button" class="btn-comprar btn-adicionar">Adicionar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="produto-card"
+                         data-id="club-de-nuit-intense-man"
+                         data-nome="Club de Nuit Intense Man"
+                         data-img="https://arabia.com.co/cdn/shop/files/arabia-armaf-club-de-nuit-intense-man-edt-283743.png?v=1717747570">
+                    <div class="produto-image">
+                        <img src="https://arabia.com.co/cdn/shop/files/arabia-armaf-club-de-nuit-intense-man-edt-283743.png?v=1717747570" alt="Club de Nuit Intense Man">
+                    </div>
+                    <div class="produto-info">
+                        <span class="produto-marca">amadeirada e especiada</span>
+                        <h3>Club de Nuit Intense Man</h3>
+                        <p>Notas de Limão, Abacaxi, Bergamota, Groselha Preta, Maçã, Bétula, Jasmim, Rosa, Almíscar, Âmbar Cinzento, Patchouli e Baunilha</p>
+                        <p class="produto-inspiracao">Inspirado no: Creed Aventus</p>
+                        <div class="produto-tamanhos">
+                            <input type="radio" id="club-nuit-5ml" name="club-nuit-tamanho" class="tamanho-input" data-tamanho="5ml" data-preco="26.90" checked>
+                            <label for="club-nuit-5ml" class="tamanho">5ml</label>
+                            <input type="radio" id="club-nuit-10ml" name="club-nuit-tamanho" class="tamanho-input" data-tamanho="10ml" data-preco="53.80">
+                            <label for="club-nuit-10ml" class="tamanho">10ml</label>
+                            <input type="radio" id="club-nuit-20ml" name="club-nuit-tamanho" class="tamanho-input" data-tamanho="20ml" data-preco="107.60">
+                            <label for="club-nuit-20ml" class="tamanho">20ml</label>
+                        </div>
+                        <div class="produto-preco">
+                            <div class="preco">R$ 26,90 <span>/ 5ml</span></div>
+                            <button type="button" class="btn-comprar btn-adicionar">Adicionar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="produto-card"
+                         data-id="hawas-black"
+                         data-nome="Hawas Black EDP"
+                         data-img="https://www.myperfumeshop.co.nz/cdn/shop/files/rasasi-hawas-black-edp-981779.png?v=1740783491&width=1400">
+                    <div class="produto-image">
+                        <img src="https://www.myperfumeshop.co.nz/cdn/shop/files/rasasi-hawas-black-edp-981779.png?v=1740783491&width=1400" alt="Hawas Black EDP">
+                    </div>
+                    <div class="produto-info">
+                        <span class="produto-marca">Chipre Unissex</span>
+                        <h3>Hawas Black EDP</h3>
+                        <p>Notas de Bergamota, Abacaxi, Toranja, Patchouli, Cedro, Jasmim, Musgo de Carvalho, Notas Amadeiradas e Âmbar</p>
+                        <p class="produto-inspiracao">Inspirado no: Hacivat de Nishane</p>
+                        <div class="produto-tamanhos">
+                            <input type="radio" id="hawas-black-5ml" name="hawas-black-tamanho" class="tamanho-input" data-tamanho="5ml" data-preco="29.90" checked>
+                            <label for="hawas-black-5ml" class="tamanho">5ml</label>
+                            <input type="radio" id="hawas-black-10ml" name="hawas-black-tamanho" class="tamanho-input" data-tamanho="10ml" data-preco="59.80">
+                            <label for="hawas-black-10ml" class="tamanho">10ml</label>
+                            <input type="radio" id="hawas-black-20ml" name="hawas-black-tamanho" class="tamanho-input" data-tamanho="20ml" data-preco="119.60">
+                            <label for="hawas-black-20ml" class="tamanho">20ml</label>
+                        </div>
+                        <div class="produto-preco">
+                            <div class="preco">R$ 29,90 <span>/ 5ml</span></div>
+                            <button type="button" class="btn-comprar btn-adicionar">Adicionar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="produto-card"
+                         data-id="khamrah-lattafa"
+                         data-nome="Khamrah Lattafa"
+                         data-img="https://fimgs.net/himg/o.6wxWjTM2Cns.jpg">
+                    <div class="produto-image">
+                        <img src="https://fimgs.net/himg/o.6wxWjTM2Cns.jpg" alt="Khamrah Lattafa">
+                    </div>
+                    <div class="produto-info">
+                        <span class="produto-marca">Oriental Especiado Compartilhável</span>
+                        <h3>Khamrah Lattafa</h3>
+                        <p>Tâmaras, Pralinê, Tuberosa, Mahonial®, Baunilha, Fava Tonka, Madeira de Âmbar, Mirra, Benjoim e Akigalawood</p>
+                        <p class="produto-inspiracao">Inspirado no: Angels Share da Kilian</p>
+                        <div class="produto-tamanhos">
+                            <input type="radio" id="khamrah-5ml" name="khamrah-tamanho" class="tamanho-input" data-tamanho="5ml" data-preco="24.90" checked>
+                            <label for="khamrah-5ml" class="tamanho">5ml</label>
+                            <input type="radio" id="khamrah-10ml" name="khamrah-tamanho" class="tamanho-input" data-tamanho="10ml" data-preco="49.80">
+                            <label for="khamrah-10ml" class="tamanho">10ml</label>
+                            <input type="radio" id="khamrah-20ml" name="khamrah-tamanho" class="tamanho-input" data-tamanho="20ml" data-preco="99.60">
+                            <label for="khamrah-20ml" class="tamanho">20ml</label>
+                        </div>
+                        <div class="produto-preco">
+                            <div class="preco">R$ 24,90 <span>/ 5ml</span></div>
+                            <button type="button" class="btn-comprar btn-adicionar">Adicionar</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="como-funciona" id="como-funciona">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">O processo</span>
+                <h2>Simples do começo ao fim</h2>
+                <p>Em quatro passos seu decante chega na sua casa, pronto para ser usado.</p>
+            </div>
+
+            <div class="passos">
+                <div class="passo">
+                    <div class="passo-numero">01</div>
+                    <h3>Escolha</h3>
+                    <p>Navegue pelo catálogo e selecione a fragrância e o tamanho que faz sentido para você.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-numero">02</div>
+                    <h3>Pedido</h3>
+                    <p>Finalize a compra pelo site. Aceitamos Pix, cartão e boleto, com a opção de parcelar.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-numero">03</div>
+                    <h3>Preparo</h3>
+                    <p>O decante é feito sob demanda em ambiente higienizado e enviado em até 48 horas úteis.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-numero">04</div>
+                    <h3>Entrega</h3>
+                    <p>O frasco chega com lacre, etiqueta e nota fiscal. Embalagem discreta, com proteção contra impacto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Comece pela fragrância que sempre quis</h2>
+            <p>Sem compromisso, sem fidelidade, sem mistério. Só o perfume que você quer, na quantidade que faz sentido.</p>
+            <a href="#produtos" class="btn btn-primary">Ver o catálogo</a>
+        </div>
+    </section>
+
+    <!-- FOOTER LANDING -->
+    <footer class="footer-landing">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">DL <span>decantes</span></div>
+                    <p>Decantes de perfumes importados, feitos a partir de frascos 100% originais. Para quem gosta de cheirar bem sem gastar uma fortuna.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#galeria">Galeria</a></li>
+                        <li><a href="#produtos">Produtos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#como-funciona">Como funciona</a></li>
+                        <li><a href="#">Política de troca</a></li>
+                        <li><a href="#">Frete e prazos</a></li>
+                        <li><a href="#">Fale conosco</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="#">dl.decantes@gmail.com</a></li>
+                        <li><a href="#">Instagram: @dl_decantes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 DL decantes. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- ============================================================
+     VIEW CHECKOUT — PASSO 1 (DADOS)
+     ============================================================ -->
+<div data-view-name="checkout-dados" hidden>
+
+    <!-- STEPS -->
+    <div class="steps">
+        <div class="container">
+            <ol class="steps-list">
+                <li class="step ativo">
+                    <div class="step-num">1</div>
+                    <div>Seus dados</div>
+                </li>
+                <li class="step">
+                    <div class="step-num">2</div>
+                    <div>Pagamento</div>
+                </li>
+                <li class="step">
+                    <div class="step-num">3</div>
+                    <div>Confirmação</div>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <main class="checkout-main">
+        <div class="container">
+
+            <div class="titulo-pagina">
+                <h1>Quase lá</h1>
+                <p>Preencha os dados abaixo para a entrega do seu decante.</p>
+            </div>
+
+            <form class="checkout-grid" id="form-dados" autocomplete="on">
+
+                <!-- FORMULÁRIO -->
+                <div class="form-card">
+
+                    <div class="form-section">
+                        <h3 class="form-section-title">Dados pessoais</h3>
+                        <p class="form-section-desc">Vamos usar essas informações para emitir a nota fiscal e identificar o seu pedido.</p>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome">Nome completo</label>
+                                <input type="text" id="nome" name="nome" placeholder="Como está no documento" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row cols-2">
+                            <div class="form-group">
+                                <label for="cpf">CPF</label>
+                                <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefone">Telefone <span>(WhatsApp, se possível)</span></label>
+                                <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="form-section-title">Endereço de entrega</h3>
+                        <p class="form-section-desc">Preencha o CEP primeiro para agilizar. O envio é feito em embalagem discreta e protegida.</p>
+
+                        <div class="form-row cep-row">
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input type="text" id="cep" name="cep" placeholder="00000-000" maxlength="9" required>
+                                <span class="form-help">Não sabe o CEP? Consulte nos Correios.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="rua">Rua / Avenida</label>
+                                <input type="text" id="rua" name="rua" placeholder="Nome da rua" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row cols-3">
+                            <div class="form-group">
+                                <label for="numero">Número</label>
+                                <input type="text" id="numero" name="numero" placeholder="Ex: 123" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="complemento">Complemento <span>(opcional)</span></label>
+                                <input type="text" id="complemento" name="complemento" placeholder="Apto, bloco, sala">
+                            </div>
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row cols-3">
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="estado">Estado</label>
+                                <select id="estado" name="estado" required>
+                                    <option value="">UF</option>
+                                    <option value="AC">AC</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AP">AP</option>
+                                    <option value="AM">AM</option>
+                                    <option value="BA">BA</option>
+                                    <option value="CE">CE</option>
+                                    <option value="DF">DF</option>
+                                    <option value="ES">ES</option>
+                                    <option value="GO">GO</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MT">MT</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MG">MG</option>
+                                    <option value="PA">PA</option>
+                                    <option value="PB">PB</option>
+                                    <option value="PR">PR</option>
+                                    <option value="PE">PE</option>
+                                    <option value="PI">PI</option>
+                                    <option value="RJ">RJ</option>
+                                    <option value="RN">RN</option>
+                                    <option value="RS">RS</option>
+                                    <option value="RO">RO</option>
+                                    <option value="RR">RR</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SP">SP</option>
+                                    <option value="SE">SE</option>
+                                    <option value="TO">TO</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pais">País</label>
+                                <select id="pais" name="pais" required>
+                                    <option value="BR" selected>Brasil</option>
+                                    <option value="PT">Portugal</option>
+                                    <option value="US">Estados Unidos</option>
+                                    <option value="OUTRO">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="submit-area">
+                        <button type="submit" class="btn-finalizar">Continuar para pagamento</button>
+                        <div class="seguro">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                <path d="M7 11V7a5 5 0 0110 0v4"/>
+                            </svg>
+                            Seus dados são protegidos e usados só para este pedido.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RESUMO DO PEDIDO -->
+                <aside class="resumo-card">
+                    <h2>Resumo do pedido</h2>
+                    <p class="resumo-subtitle">Confira o que está levando antes de continuar.</p>
+
+                    <div class="resumo-vazio" style="display: none;">
+                        <p>Seu carrinho está vazio.</p>
+                        <a href="#produtos">Voltar ao catálogo</a>
+                    </div>
+
+                    <div class="resumo-itens"></div>
+
+                    <div class="resumo-totais">
+                        <div class="resumo-linha">
+                            <span>Subtotal</span>
+                            <span class="resumo-subtotal-valor">R$ 0,00</span>
+                        </div>
+                        <div class="resumo-linha">
+                            <span>Frete</span>
+                            <span>Grátis</span>
+                        </div>
+                        <div class="resumo-total">
+                            <span class="label">Total</span>
+                            <span class="valor">R$ 0,00</span>
+                        </div>
+                    </div>
+                </aside>
+
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer-checkout">
+        <div class="container">
+            © 2026 DL decantes · Compra protegida · Nota fiscal emitida a cada pedido
+        </div>
+    </footer>
+
+</div>
+
+<!-- ============================================================
+     VIEW CHECKOUT — PASSO 2 (PAGAMENTO PIX)
+     ============================================================ -->
+<div data-view-name="checkout-pagamento" hidden>
+
+    <div class="steps">
+        <div class="container">
+            <ol class="steps-list">
+                <li class="step completo">
+                    <div class="step-num">1</div>
+                    <div>Seus dados</div>
+                </li>
+                <li class="step ativo">
+                    <div class="step-num">2</div>
+                    <div>Pagamento</div>
+                </li>
+                <li class="step">
+                    <div class="step-num">3</div>
+                    <div>Confirmação</div>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <main class="checkout-main">
+        <div class="container">
+
+            <div class="titulo-pagina">
+                <h1>Pague com Pix</h1>
+                <p>Aprovação imediata e pedido separado na hora.</p>
+            </div>
+
+            <div class="checkout-grid">
+
+                <div class="pagamento-card">
+
+                    <div class="pix-bloco">
+                        <div class="pix-detalhes">
+                            <div class="pix-detalhe-item">
+                                <div class="pix-num">1</div>
+                                <div><strong>Confirme o pedido</strong> abaixo e o QR Code será gerado.</div>
+                            </div>
+                            <div class="pix-detalhe-item">
+                                <div class="pix-num">2</div>
+                                <div><strong>Pague pelo app do banco</strong> em até 15 minutos.</div>
+                            </div>
+                            <div class="pix-detalhe-item">
+                                <div class="pix-num">3</div>
+                                <div><strong>Pedido separado na hora</strong> assim que o pagamento cair.</div>
+                            </div>
+                        </div>
+
+                        <div class="pix-valor">
+                            <span class="pix-valor-label">Valor a pagar</span>
+                            <span class="pix-valor-numero">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <div class="submit-area">
+                        <a href="#checkout/confirmacao" class="btn-finalizar">Finalizar pedido</a>
+                        <div class="seguro">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                <path d="M7 11V7a5 5 0 0110 0v4"/>
+                            </svg>
+                            Ambiente seguro · seus dados são criptografados de ponta a ponta
+                        </div>
+                        <div class="selos">
+                            <div class="selos-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                                </svg>
+                                SSL ativo
+                            </div>
+                            <div class="selos-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 12l2 2 4-4"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                Compra protegida
+                            </div>
+                            <div class="selos-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                    <path d="M3 10h18"/>
+                                </svg>
+                                Nota fiscal
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <aside class="resumo-card">
+                    <h2>Resumo do pedido</h2>
+                    <p class="resumo-subtitle">Última conferida antes de fechar.</p>
+
+                    <div class="resumo-vazio" style="display: none;">
+                        <p>Seu carrinho está vazio.</p>
+                        <a href="#produtos">Voltar ao catálogo</a>
+                    </div>
+
+                    <div class="resumo-itens"></div>
+
+                    <div class="resumo-totais">
+                        <div class="resumo-linha">
+                            <span>Subtotal</span>
+                            <span class="resumo-subtotal-valor">R$ 0,00</span>
+                        </div>
+                        <div class="resumo-linha">
+                            <span>Frete</span>
+                            <span>Grátis</span>
+                        </div>
+                        <div class="resumo-total">
+                            <span class="label">Total</span>
+                            <span class="valor">R$ 0,00</span>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-checkout">
+        <div class="container">
+            © 2026 DL decantes · Compra protegida · Nota fiscal emitida a cada pedido
+        </div>
+    </footer>
+
+</div>
+
+<!-- ============================================================
+     VIEW CHECKOUT — PASSO 3 (CONFIRMAÇÃO)
+     ============================================================ -->
+<div data-view-name="checkout-confirmacao" hidden>
+
+    <div class="steps">
+        <div class="container">
+            <ol class="steps-list">
+                <li class="step completo">
+                    <div class="step-num">1</div>
+                    <div>Seus dados</div>
+                </li>
+                <li class="step completo">
+                    <div class="step-num">2</div>
+                    <div>Pagamento</div>
+                </li>
+                <li class="step ativo">
+                    <div class="step-num">3</div>
+                    <div>Confirmação</div>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <main class="checkout-main">
+        <div class="container">
+
+            <div class="sucesso-topo">
+                <div class="check-circle">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12l5 5L20 7"/>
+                    </svg>
+                </div>
+                <h1>Pedido recebido</h1>
+                <p>Falta só você concluir o Pix. Assim que cair, separamos o decante e enviamos o código de rastreio para o seu e-mail.</p>
+            </div>
+
+            <div class="pedido-num">
+                <span class="pedido-num-label">Número do pedido</span>
+                <span class="pedido-num-valor">#DL-2026-00481</span>
+            </div>
+
+            <div class="card">
+                <h2 class="card-titulo">Pague pelo Pix</h2>
+                <p class="card-desc">Escaneie o QR Code ou use o código copia-e-cola pelo app do seu banco.</p>
+
+                <div class="pix-area">
+                    <div class="qrcode-box">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                            <rect width="100" height="100" fill="#ffffff"/>
+                            <rect x="6" y="6" width="20" height="20" fill="#0a2540"/>
+                            <rect x="9" y="9" width="14" height="14" fill="#ffffff"/>
+                            <rect x="12" y="12" width="8" height="8" fill="#0a2540"/>
+                            <rect x="74" y="6" width="20" height="20" fill="#0a2540"/>
+                            <rect x="77" y="9" width="14" height="14" fill="#ffffff"/>
+                            <rect x="80" y="12" width="8" height="8" fill="#0a2540"/>
+                            <rect x="6" y="74" width="20" height="20" fill="#0a2540"/>
+                            <rect x="9" y="77" width="14" height="14" fill="#ffffff"/>
+                            <rect x="12" y="80" width="8" height="8" fill="#0a2540"/>
+                            <g fill="#0a2540">
+                                <rect x="32" y="8" width="3" height="3"/>
+                                <rect x="38" y="8" width="3" height="3"/>
+                                <rect x="44" y="8" width="3" height="3"/>
+                                <rect x="56" y="8" width="3" height="3"/>
+                                <rect x="62" y="8" width="3" height="3"/>
+                                <rect x="32" y="14" width="3" height="3"/>
+                                <rect x="44" y="14" width="3" height="3"/>
+                                <rect x="50" y="14" width="3" height="3"/>
+                                <rect x="62" y="14" width="3" height="3"/>
+                                <rect x="68" y="14" width="3" height="3"/>
+                                <rect x="38" y="20" width="3" height="3"/>
+                                <rect x="44" y="20" width="3" height="3"/>
+                                <rect x="56" y="20" width="3" height="3"/>
+                                <rect x="68" y="20" width="3" height="3"/>
+                                <rect x="8" y="32" width="3" height="3"/>
+                                <rect x="14" y="32" width="3" height="3"/>
+                                <rect x="20" y="32" width="3" height="3"/>
+                                <rect x="32" y="32" width="3" height="3"/>
+                                <rect x="38" y="32" width="3" height="3"/>
+                                <rect x="50" y="32" width="3" height="3"/>
+                                <rect x="56" y="32" width="3" height="3"/>
+                                <rect x="68" y="32" width="3" height="3"/>
+                                <rect x="80" y="32" width="3" height="3"/>
+                                <rect x="86" y="32" width="3" height="3"/>
+                                <rect x="92" y="32" width="3" height="3"/>
+                                <rect x="14" y="38" width="3" height="3"/>
+                                <rect x="26" y="38" width="3" height="3"/>
+                                <rect x="38" y="38" width="3" height="3"/>
+                                <rect x="50" y="38" width="3" height="3"/>
+                                <rect x="62" y="38" width="3" height="3"/>
+                                <rect x="74" y="38" width="3" height="3"/>
+                                <rect x="86" y="38" width="3" height="3"/>
+                                <rect x="8" y="44" width="3" height="3"/>
+                                <rect x="20" y="44" width="3" height="3"/>
+                                <rect x="32" y="44" width="3" height="3"/>
+                                <rect x="44" y="44" width="3" height="3"/>
+                                <rect x="56" y="44" width="3" height="3"/>
+                                <rect x="62" y="44" width="3" height="3"/>
+                                <rect x="74" y="44" width="3" height="3"/>
+                                <rect x="80" y="44" width="3" height="3"/>
+                                <rect x="92" y="44" width="3" height="3"/>
+                                <rect x="14" y="50" width="3" height="3"/>
+                                <rect x="26" y="50" width="3" height="3"/>
+                                <rect x="32" y="50" width="3" height="3"/>
+                                <rect x="44" y="50" width="3" height="3"/>
+                                <rect x="56" y="50" width="3" height="3"/>
+                                <rect x="68" y="50" width="3" height="3"/>
+                                <rect x="74" y="50" width="3" height="3"/>
+                                <rect x="86" y="50" width="3" height="3"/>
+                                <rect x="8" y="56" width="3" height="3"/>
+                                <rect x="20" y="56" width="3" height="3"/>
+                                <rect x="38" y="56" width="3" height="3"/>
+                                <rect x="50" y="56" width="3" height="3"/>
+                                <rect x="62" y="56" width="3" height="3"/>
+                                <rect x="74" y="56" width="3" height="3"/>
+                                <rect x="80" y="56" width="3" height="3"/>
+                                <rect x="92" y="56" width="3" height="3"/>
+                                <rect x="14" y="62" width="3" height="3"/>
+                                <rect x="26" y="62" width="3" height="3"/>
+                                <rect x="32" y="62" width="3" height="3"/>
+                                <rect x="44" y="62" width="3" height="3"/>
+                                <rect x="56" y="62" width="3" height="3"/>
+                                <rect x="68" y="62" width="3" height="3"/>
+                                <rect x="86" y="62" width="3" height="3"/>
+                                <rect x="32" y="74" width="3" height="3"/>
+                                <rect x="38" y="74" width="3" height="3"/>
+                                <rect x="50" y="74" width="3" height="3"/>
+                                <rect x="62" y="74" width="3" height="3"/>
+                                <rect x="68" y="74" width="3" height="3"/>
+                                <rect x="38" y="80" width="3" height="3"/>
+                                <rect x="44" y="80" width="3" height="3"/>
+                                <rect x="56" y="80" width="3" height="3"/>
+                                <rect x="68" y="80" width="3" height="3"/>
+                                <rect x="32" y="86" width="3" height="3"/>
+                                <rect x="44" y="86" width="3" height="3"/>
+                                <rect x="50" y="86" width="3" height="3"/>
+                                <rect x="62" y="86" width="3" height="3"/>
+                                <rect x="68" y="86" width="3" height="3"/>
+                                <rect x="38" y="92" width="3" height="3"/>
+                                <rect x="50" y="92" width="3" height="3"/>
+                                <rect x="56" y="92" width="3" height="3"/>
+                                <rect x="68" y="92" width="3" height="3"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="pix-instrucoes">
+                        <h3>Como pagar</h3>
+                        <ol class="pix-passos">
+                            <li>Abra o app do seu banco e toque em Pix</li>
+                            <li>Escolha "Pagar com QR Code" ou "Pix Copia e Cola"</li>
+                            <li>Escaneie o código ao lado ou cole o texto abaixo</li>
+                            <li>Confira o valor e confirme</li>
+                        </ol>
+
+                        <div class="copia-cola-area">
+                            <div class="copia-cola-label">Pix copia e cola</div>
+                            <div class="copia-cola-box">
+                                <div class="copia-cola-codigo">00020126580014BR.GOV.BCB.PIX0136a629534e-7693-4846-852d-09a73b...</div>
+                                <button type="button" class="btn-copiar">Copiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="aviso-prazo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <p>O QR Code expira em <strong>15 minutos</strong>. Se passar do prazo, é só voltar ao site e gerar outro.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-titulo">Resumo</h2>
+                <p class="card-desc">Tudo o que está incluso neste pedido.</p>
+
+                <div class="resumo-grid">
+                    <div class="resumo-bloco">
+                        <h4>Comprador</h4>
+                        <p>
+                            <strong>Marina dos Santos Oliveira</strong><br>
+                            CPF: 123.456.789-00<br>
+                            marina.oliveira@email.com<br>
+                            (44) 99999-0000
+                        </p>
+                    </div>
+                    <div class="resumo-bloco">
+                        <h4>Entrega</h4>
+                        <p>
+                            Rua das Palmeiras, 142<br>
+                            Centro · Paranavaí, PR<br>
+                            CEP 87701-000<br>
+                            Brasil
+                        </p>
+                    </div>
+                </div>
+
+                <div class="confirmacao-itens"></div>
+
+                <div class="confirmacao-vazio" style="display: none;">
+                    Nenhum pedido recente para mostrar. <a href="#produtos">Voltar ao catálogo</a>
+                </div>
+
+                <div class="totais">
+                    <div class="totais-linha">
+                        <span>Subtotal</span>
+                        <span class="confirmacao-subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="totais-linha">
+                        <span>Frete</span>
+                        <span>Grátis</span>
+                    </div>
+                    <div class="totais-final">
+                        <span class="label">Total a pagar</span>
+                        <span class="valor confirmacao-total">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="acoes">
+                    <a href="#" class="btn-acao btn-secundario">Voltar à loja</a>
+                    <a href="#" class="btn-acao btn-primario">Já paguei</a>
+                </div>
+            </div>
+
+            <div class="info-final">
+                Os detalhes deste pedido também foram enviados para o seu e-mail.<br>
+                Em caso de dúvidas, fale com a gente em <a href="#">contato@dldecantes.com</a>.
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer-checkout">
+        <div class="container">
+            © 2026 DL decantes · Compra protegida · Nota fiscal emitida a cada pedido
+        </div>
+    </footer>
+
+</div>
+
+<!-- ============================================================
+     DRAWER (carrinho lateral) — sempre presente
+     ============================================================ -->
+<div class="drawer-backdrop" aria-hidden="true"></div>
+<aside class="drawer" aria-label="Carrinho de compras" role="dialog" aria-modal="true">
+    <div class="drawer-header">
+        <h2>Seu carrinho</h2>
+        <button type="button" class="drawer-fechar" aria-label="Fechar carrinho">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 6l12 12M6 18L18 6"/>
+            </svg>
+        </button>
+    </div>
+    <div class="drawer-body">
+        <div class="drawer-vazio">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 7h12l-1.2 11a2 2 0 01-2 1.8H9.2a2 2 0 01-2-1.8L6 7z"/>
+                <path d="M9 7V5a3 3 0 016 0v2"/>
+            </svg>
+            <h3>Carrinho vazio</h3>
+            <p>Escolha um decante no catálogo e ele aparece aqui.</p>
+        </div>
+        <div class="drawer-itens"></div>
+    </div>
+    <div class="drawer-rodape">
+        <div class="drawer-total">
+            <span class="label">Total</span>
+            <span class="valor">R$ 0,00</span>
+        </div>
+        <p class="drawer-aviso">Frete grátis para todo o Brasil.</p>
+        <a href="#checkout/dados" class="drawer-finalizar">Finalizar pedido</a>
+    </div>
+</aside>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ============== ESTADO DO CARRINHO ============== */
+    var STORAGE_KEY = 'dl-carrinho';
+    var SNAPSHOT_KEY = 'dl-ultimo-pedido';
+
+    function carregar() {
+        try {
+            var dados = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            return Array.isArray(dados) ? dados : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function salvar(itens) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(itens));
+    }
+
+    function moeda(valor) {
+        return 'R$ ' + valor.toFixed(2).replace('.', ',');
+    }
+
+    function escapar(texto) {
+        var div = document.createElement('div');
+        div.textContent = texto == null ? '' : String(texto);
+        return div.innerHTML;
+    }
+
+    function notificar() {
+        window.dispatchEvent(new CustomEvent('carrinho:atualizado'));
+    }
+
+    var Carrinho = {
+        itens: function () { return carregar(); },
+        contagem: function () {
+            return carregar().reduce(function (s, i) { return s + i.qtd; }, 0);
+        },
+        total: function () {
+            return carregar().reduce(function (s, i) { return s + i.qtd * i.preco; }, 0);
+        },
+        adicionar: function (produto) {
+            var itens = carregar();
+            var existente = itens.filter(function (i) { return i.id === produto.id; })[0];
+            if (existente) {
+                existente.qtd += produto.qtd || 1;
+            } else {
+                itens.push({
+                    id: produto.id,
+                    nome: produto.nome,
+                    tamanho: produto.tamanho,
+                    preco: produto.preco,
+                    img: produto.img,
+                    qtd: produto.qtd || 1
+                });
+            }
+            salvar(itens);
+            notificar();
+        },
+        atualizarQtd: function (id, qtd) {
+            if (qtd <= 0) { return this.remover(id); }
+            var itens = carregar();
+            var item = itens.filter(function (i) { return i.id === id; })[0];
+            if (!item) { return; }
+            item.qtd = qtd;
+            salvar(itens);
+            notificar();
+        },
+        remover: function (id) {
+            var itens = carregar().filter(function (i) { return i.id !== id; });
+            salvar(itens);
+            notificar();
+        },
+        limpar: function () {
+            salvar([]);
+            notificar();
+        }
+    };
+
+    window.Carrinho = Carrinho;
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === STORAGE_KEY) { notificar(); }
+    });
+
+    /* ============== HELPERS DE VIEW ============== */
+    function viewAtual() {
+        return document.body.dataset.view || 'landing';
+    }
+
+    function elemDaView(viewName, seletor) {
+        var raiz = document.querySelector('[data-view-name="' + viewName + '"]:not([hidden])');
+        if (!raiz) { return null; }
+        return raiz.querySelector(seletor);
+    }
+
+    /* ============== RENDERIZAÇÃO ============== */
+    function atualizarBadge() {
+        var badges = document.querySelectorAll('.carrinho-badge');
+        var n = Carrinho.contagem();
+        badges.forEach(function (b) {
+            b.textContent = n;
+            b.classList.toggle('visivel', n > 0);
+        });
+    }
+
+    function renderizarDrawer() {
+        var lista = document.querySelector('.drawer-itens');
+        if (!lista) { return; }
+        var totalEl = document.querySelector('.drawer-total .valor');
+        var vazio = document.querySelector('.drawer-vazio');
+        var finalizar = document.querySelector('.drawer-finalizar');
+
+        var itens = Carrinho.itens();
+
+        if (itens.length === 0) {
+            lista.innerHTML = '';
+            if (vazio) { vazio.style.display = 'flex'; }
+            if (totalEl) { totalEl.textContent = moeda(0); }
+            if (finalizar) { finalizar.setAttribute('disabled', 'disabled'); }
+            return;
+        }
+
+        if (vazio) { vazio.style.display = 'none'; }
+        if (finalizar) { finalizar.removeAttribute('disabled'); }
+
+        lista.innerHTML = itens.map(function (it) {
+            return '' +
+                '<div class="drawer-item" data-id="' + escapar(it.id) + '">' +
+                    '<div class="drawer-item-img"><img src="' + escapar(it.img) + '" alt="' + escapar(it.nome) + '"></div>' +
+                    '<div class="drawer-item-info">' +
+                        '<h4>' + escapar(it.nome) + '</h4>' +
+                        '<div class="drawer-item-meta">Decante ' + escapar(it.tamanho) + ' · ' + moeda(it.preco) + '</div>' +
+                        '<div class="drawer-item-controles">' +
+                            '<button type="button" class="qtd-btn" data-acao="diminuir" aria-label="Diminuir quantidade">−</button>' +
+                            '<span class="qtd">' + it.qtd + '</span>' +
+                            '<button type="button" class="qtd-btn" data-acao="aumentar" aria-label="Aumentar quantidade">+</button>' +
+                            '<button type="button" class="remover" data-acao="remover">Remover</button>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="drawer-item-preco">' + moeda(it.qtd * it.preco) + '</div>' +
+                '</div>';
+        }).join('');
+
+        if (totalEl) { totalEl.textContent = moeda(Carrinho.total()); }
+    }
+
+    function renderizarResumoCheckout(viewName) {
+        var cont = elemDaView(viewName, '.resumo-itens');
+        if (!cont) { return; }
+        var subtotalEl = elemDaView(viewName, '.resumo-subtotal-valor');
+        var totalEl = elemDaView(viewName, '.resumo-total .valor');
+        var pixValorEl = elemDaView(viewName, '.pix-valor-numero');
+        var vazio = elemDaView(viewName, '.resumo-vazio');
+        var btnFinalizar = elemDaView(viewName, '.btn-finalizar');
+
+        var itens = Carrinho.itens();
+        var total = Carrinho.total();
+
+        if (itens.length === 0) {
+            cont.innerHTML = '';
+            if (vazio) { vazio.style.display = 'block'; }
+            if (subtotalEl) { subtotalEl.textContent = moeda(0); }
+            if (totalEl) { totalEl.textContent = moeda(0); }
+            if (pixValorEl) { pixValorEl.textContent = moeda(0); }
+            if (btnFinalizar) {
+                btnFinalizar.classList.add('disabled');
+                btnFinalizar.setAttribute('disabled', 'disabled');
+            }
+            return;
+        }
+
+        if (vazio) { vazio.style.display = 'none'; }
+        if (btnFinalizar) {
+            btnFinalizar.classList.remove('disabled');
+            btnFinalizar.removeAttribute('disabled');
+        }
+
+        cont.innerHTML = itens.map(function (it) {
+            return '' +
+                '<div class="resumo-item">' +
+                    '<div class="resumo-imagem"><img src="' + escapar(it.img) + '" alt="' + escapar(it.nome) + '"></div>' +
+                    '<div class="resumo-info">' +
+                        '<h4>' + escapar(it.nome) + '</h4>' +
+                        '<div class="resumo-meta">Decante ' + escapar(it.tamanho) + ' · Quantidade: ' + it.qtd + '</div>' +
+                    '</div>' +
+                    '<span class="resumo-preco">' + moeda(it.qtd * it.preco) + '</span>' +
+                '</div>';
+        }).join('');
+
+        if (subtotalEl) { subtotalEl.textContent = moeda(total); }
+        if (totalEl) { totalEl.textContent = moeda(total); }
+        if (pixValorEl) { pixValorEl.textContent = moeda(total); }
+    }
+
+    function renderizarConfirmacao() {
+        var cont = elemDaView('checkout-confirmacao', '.confirmacao-itens');
+        if (!cont) { return; }
+
+        var subtotalEl = elemDaView('checkout-confirmacao', '.confirmacao-subtotal');
+        var totalEl = elemDaView('checkout-confirmacao', '.confirmacao-total');
+        var vazio = elemDaView('checkout-confirmacao', '.confirmacao-vazio');
+        var totaisEl = elemDaView('checkout-confirmacao', '.totais');
+
+        var atuais = Carrinho.itens();
+        var itens;
+
+        if (atuais.length > 0) {
+            try { localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(atuais)); } catch (e) {}
+            itens = atuais.slice();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
+            atualizarBadge();
+        } else {
+            try {
+                var dados = JSON.parse(localStorage.getItem(SNAPSHOT_KEY));
+                itens = Array.isArray(dados) ? dados : [];
+            } catch (e) { itens = []; }
+        }
+
+        if (itens.length === 0) {
+            cont.innerHTML = '';
+            if (vazio) { vazio.style.display = 'block'; }
+            if (totaisEl) { totaisEl.style.display = 'none'; }
+            return;
+        }
+
+        if (vazio) { vazio.style.display = 'none'; }
+        if (totaisEl) { totaisEl.style.display = ''; }
+
+        cont.innerHTML = itens.map(function (it) {
+            return '' +
+                '<div class="item-pedido">' +
+                    '<div class="item-imagem"><img src="' + escapar(it.img) + '" alt="' + escapar(it.nome) + '"></div>' +
+                    '<div class="item-info">' +
+                        '<h4>' + escapar(it.nome) + '</h4>' +
+                        '<span class="meta">Decante ' + escapar(it.tamanho) + ' · Quantidade: ' + it.qtd + '</span>' +
+                    '</div>' +
+                    '<span class="item-preco">' + moeda(it.qtd * it.preco) + '</span>' +
+                '</div>';
+        }).join('');
+
+        var total = itens.reduce(function (s, i) { return s + i.qtd * i.preco; }, 0);
+        if (subtotalEl) { subtotalEl.textContent = moeda(total); }
+        if (totalEl) { totalEl.textContent = moeda(total); }
+    }
+
+    /* ============== EVENTOS DA LANDING ============== */
+    function feedbackBotao(btn) {
+        var original = btn.dataset.textoOriginal || btn.textContent;
+        btn.dataset.textoOriginal = original;
+        btn.classList.add('adicionado');
+        btn.textContent = 'Adicionado ✓';
+        clearTimeout(btn._timer);
+        btn._timer = setTimeout(function () {
+            btn.classList.remove('adicionado');
+            btn.textContent = original;
+        }, 1400);
+    }
+
+    function bindAdicionar() {
+        document.querySelectorAll('.btn-adicionar').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                var card = btn.closest('.produto-card');
+                if (!card) { return; }
+                var checked = card.querySelector('.tamanho-input:checked');
+                if (!checked) { return; }
+                var tamanho = checked.dataset.tamanho;
+                var preco = parseFloat(checked.dataset.preco);
+                Carrinho.adicionar({
+                    id: card.dataset.id + '-' + tamanho,
+                    nome: card.dataset.nome,
+                    tamanho: tamanho,
+                    preco: preco,
+                    img: card.dataset.img
+                });
+                feedbackBotao(btn);
+                abrirDrawer();
+            });
+        });
+    }
+
+    function bindTrocaTamanho() {
+        document.querySelectorAll('.tamanho-input').forEach(function (input) {
+            input.addEventListener('change', function () {
+                var card = input.closest('.produto-card');
+                if (!card) { return; }
+                var checked = card.querySelector('.tamanho-input:checked');
+                if (!checked) { return; }
+                var precoEl = card.querySelector('.preco');
+                if (precoEl) {
+                    precoEl.innerHTML = moeda(parseFloat(checked.dataset.preco)) +
+                        ' <span>/ ' + escapar(checked.dataset.tamanho) + '</span>';
+                }
+            });
+        });
+    }
+
+    function abrirDrawer() {
+        document.body.classList.add('drawer-aberto');
+    }
+
+    function fecharDrawer() {
+        document.body.classList.remove('drawer-aberto');
+    }
+
+    function bindDrawer() {
+        document.querySelectorAll('.carrinho-btn').forEach(function (b) {
+            b.addEventListener('click', function (e) {
+                e.preventDefault();
+                abrirDrawer();
+            });
+        });
+        document.querySelectorAll('.drawer-fechar, .drawer-backdrop').forEach(function (el) {
+            el.addEventListener('click', fecharDrawer);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { fecharDrawer(); }
+        });
+        var lista = document.querySelector('.drawer-itens');
+        if (lista) {
+            lista.addEventListener('click', function (e) {
+                var btn = e.target.closest('[data-acao]');
+                if (!btn) { return; }
+                var item = btn.closest('.drawer-item');
+                if (!item) { return; }
+                var id = item.dataset.id;
+                var acao = btn.dataset.acao;
+                var atual = Carrinho.itens().filter(function (i) { return i.id === id; })[0];
+                if (!atual) { return; }
+                if (acao === 'aumentar') { Carrinho.atualizarQtd(id, atual.qtd + 1); }
+                else if (acao === 'diminuir') { Carrinho.atualizarQtd(id, atual.qtd - 1); }
+                else if (acao === 'remover') { Carrinho.remover(id); }
+            });
+        }
+        // Fecha o drawer quando o usuário clica em "Finalizar pedido"
+        var finalizar = document.querySelector('.drawer-finalizar');
+        if (finalizar) {
+            finalizar.addEventListener('click', function () {
+                if (finalizar.hasAttribute('disabled')) { return; }
+                fecharDrawer();
+            });
+        }
+    }
+
+    function bindFormDados() {
+        var form = document.getElementById('form-dados');
+        if (!form) { return; }
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            location.hash = 'checkout/pagamento';
+        });
+    }
+
+    /* ============== ROUTING ============== */
+    function viewDoHash() {
+        var hash = location.hash;
+        if (hash === '#checkout/dados') { return 'checkout-dados'; }
+        if (hash === '#checkout/pagamento') { return 'checkout-pagamento'; }
+        if (hash === '#checkout/confirmacao') { return 'checkout-confirmacao'; }
+        return 'landing';
+    }
+
+    function navegar() {
+        var view = viewDoHash();
+        document.body.dataset.view = view;
+        fecharDrawer();
+
+        document.querySelectorAll('[data-view-name]').forEach(function (el) {
+            if (el.dataset.viewName === view) {
+                el.removeAttribute('hidden');
+            } else {
+                el.setAttribute('hidden', '');
+            }
+        });
+
+        // Re-renderizar o que for relevante para a view atual
+        if (view === 'checkout-dados' || view === 'checkout-pagamento') {
+            renderizarResumoCheckout(view);
+        }
+        if (view === 'checkout-confirmacao') {
+            renderizarConfirmacao();
+        }
+
+        // Scroll: se for âncora interna da landing, rola até ela; senão volta ao topo
+        if (view === 'landing' && location.hash && location.hash.indexOf('#checkout/') !== 0) {
+            try {
+                var alvo = document.querySelector(location.hash);
+                if (alvo) {
+                    alvo.scrollIntoView({behavior: 'smooth'});
+                    return;
+                }
+            } catch (e) {}
+        }
+        window.scrollTo(0, 0);
+    }
+
+    /* ============== INIT ============== */
+    function init() {
+        bindAdicionar();
+        bindTrocaTamanho();
+        bindDrawer();
+        bindFormDados();
+
+        navegar();
+        atualizarBadge();
+        renderizarDrawer();
+
+        window.addEventListener('hashchange', navegar);
+        window.addEventListener('carrinho:atualizado', function () {
+            atualizarBadge();
+            renderizarDrawer();
+            var v = viewAtual();
+            if (v === 'checkout-dados' || v === 'checkout-pagamento') {
+                renderizarResumoCheckout(v);
+            }
+            // confirmacao não é re-renderizada no listener para evitar loop com Carrinho.limpar
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+</body>
+</html>
